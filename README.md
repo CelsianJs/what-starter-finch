@@ -13,6 +13,7 @@ Finch is an accessible learning app starter for What Framework. It demonstrates:
 
 - Node.js 22.x
 - npm 10+
+- After `npm ci`, install Playwright Chromium for browser verification: `npx playwright install chromium`
 - Vura credentials only when deploying
 
 ## Run locally
@@ -40,6 +41,7 @@ npm run test:browser
 ```
 
 `npm run verify` runs all three. Browser tests save screenshots under `test-results/screenshots`.
+On minimal Linux CI images that do not already include browser system libraries, use `npx playwright install --with-deps chromium` instead.
 
 ## Reset local state
 
