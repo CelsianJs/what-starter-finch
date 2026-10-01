@@ -4,6 +4,7 @@
 
 - 2026-10-01 12:58 America/New_York — Created starter scope after the initially referenced tracker entry was not present.
 - 2026-10-01 13:08 America/New_York — Implemented app shell, dataset-driven lessons, progress state, browser/unit tests, docs, and Vura static alias script.
+- 2026-10-01 15:34 America/New_York — Fixed Vura upload packaging by removing Finch's handwritten partial manifest and adding a contract check for the exact static shape Vura will synthesize.
 
 ## What it demonstrates
 
@@ -12,6 +13,7 @@
 - Effects persist progress, report storage-denied fallback, and update the document title.
 - `/lessons/:slug` is a dynamic client route backed by a local dataset.
 - `scripts/static-aliases.mjs` writes route-specific static HTML aliases and a `404.html` for Vura static hosting.
+- `scripts/check.mjs` asserts every route artifact exists, `dist/manifest.json` is absent, the earlier partial-manifest shape fails for `timestamp` and `pages[].filePath`, and the canonical public static manifest shape validates with `@celsian/vura-contract`.
 
 ## Actual state/effect issue and fix
 
@@ -57,6 +59,32 @@ After: the home route shows the first lesson quiz question directly below the he
 </article>
 ```
 
+## Vura static upload fix
+
+Upload failure: Finch's first static packager wrote this partial manifest:
+
+```json
+{
+  "pages": [{ "urlPattern": "/", "mode": "static" }],
+  "api": []
+}
+```
+
+Vura treats a present `dist/manifest.json` as authoritative, so validation rejected the upload before static route synthesis could run because the manifest lacked `timestamp` and each page's `filePath`.
+
+Fix: Finch now omits `dist/manifest.json` for its pure-static Vite output and validates the public shape Vura will synthesize from the built HTML files:
+
+```js
+parseManifest({
+  api: [],
+  pages: [{ filePath: 'index.html', urlPattern: '/', mode: 'static', hasLoader: false, hasGetServerData: false, config: { staticKey: 'index.html' } }],
+  layouts: [],
+  timestamp: '2026-01-01T00:00:00.000Z'
+}, { allowLegacy: true });
+```
+
+The check also deliberately proves the former partial shape fails for the expected fields, so this exact upload regression is covered by `npm run build`.
+
 ## Smooth path for agents
 
 1. Keep source state tiny and derive display state with `computed`.
@@ -67,7 +95,7 @@ After: the home route shows the first lesson quiz question directly below the he
 ## Verification checklist
 
 - `npm ci` — clean install with 0 vulnerabilities in the local verification run.
-- `npm run verify` — unit tests, Vite build/static aliases, and browser smoke.
+- `npm run verify` — unit tests, Vite build/static aliases, Vura static contract check, and browser smoke.
 - Real flow: answer the Signals quiz, reload, observe `25% complete`, reset to `0%`, reveal a flashcard, hit a missing route.
 - Visual proof: desktop and mobile screenshots are written to `test-results/screenshots`.
 
@@ -76,3 +104,4 @@ After: the home route shows the first lesson quiz question directly below the he
 - Progress is local-only by design; there is no account sync.
 - Flashcard repetition is a simple due-card ordering, not a full spaced-repetition algorithm.
 - The app is static and does not use Vura server APIs; Signal covers the server-rendered/runtime route features in this starter batch.
+- Finch relies on Vura's static manifest synthesis during deployment rather than shipping a handwritten `dist/manifest.json`.

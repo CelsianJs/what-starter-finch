@@ -7,7 +7,7 @@ Finch is an accessible learning app starter for What Framework. It demonstrates:
 - effects for local persistence and document title updates;
 - routeable lessons with quizzes;
 - flashcards, reset, and storage-denied fallback;
-- static Vura output with route aliases and a real 404.
+- static Vura output with route aliases, a real 404, and no handwritten partial manifest.
 
 ## Prerequisites
 
@@ -73,6 +73,7 @@ Planned public repo: `CelsianJs/what-starter-finch`.
 - `src/routes.js` — route table and dynamic lesson detail route.
 - `src/pages/LessonDetail.jsx` — quiz interaction.
 - `src/pages/Practice.jsx` — flashcards and global state.
-- `scripts/static-aliases.mjs` — static route aliases, route-specific titles, 404, and Vura manifest proof.
+- `scripts/static-aliases.mjs` — static route aliases, route-specific titles, and 404 output.
+- `scripts/check.mjs` — validates that Finch omits `dist/manifest.json` and that Vura's public manifest contract accepts the canonical static route shape.
 
 See [BUILD.md](./BUILD.md) and `/build` for the longer implementation guide.

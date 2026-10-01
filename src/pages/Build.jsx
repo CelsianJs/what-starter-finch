@@ -33,6 +33,17 @@ persistProgress(window.localStorage);`}</pre>
   <h2>{firstLesson.quiz.question}</h2>
 </article>`}</pre>
         </article>
+        <article>
+          <h2>Vura static upload fix</h2>
+          <p>Finch is a pure static starter, so it does not write <code>dist/manifest.json</code>. The build validates that the old partial manifest fails for the expected <code>timestamp</code> and <code>pages[].filePath</code> fields, then validates the canonical static manifest shape Vura can synthesize from the HTML files.</p>
+          <pre>{`// dist/manifest.json is intentionally absent.
+parseManifest({
+  pages: [{ filePath: 'index.html', urlPattern: '/', mode: 'static' }],
+  api: [],
+  layouts: [],
+  timestamp: '2026-01-01T00:00:00.000Z'
+}, { allowLegacy: true });`}</pre>
+        </article>
       </div>
     </section>
   );
