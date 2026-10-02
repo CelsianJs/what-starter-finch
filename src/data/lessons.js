@@ -10,6 +10,10 @@ export const lessons = [
       'Call it with a new value, or an updater function, to change the value.',
       'What tracks the reads that happen during render, computed values, and effects.',
     ],
+    code: `const count = signal(0);
+
+count(); // read
+count((value) => value + 1); // update`,
     quiz: {
       question: 'What does a signal read look like?',
       answers: ['count()', 'count.value', 'read(count)'],
@@ -32,6 +36,9 @@ export const lessons = [
       'They run again only when those dependencies change.',
       'Keep source state small and derive everything else from it.',
     ],
+    code: `const percent = computed(() =>
+  Math.round((completedCount() / lessons.length) * 100)
+);`,
     quiz: {
       question: 'What should you store when a value can be derived?',
       answers: ['The smallest source state', 'Every display label', 'A copy in localStorage only'],
@@ -54,6 +61,10 @@ export const lessons = [
       'Read the signals that should trigger the effect inside the effect body.',
       'Return cleanup for timers, subscriptions, and async cancellation flags.',
     ],
+    code: `effect(() => {
+  const snapshot = progress();
+  localStorage.setItem(key, JSON.stringify(snapshot));
+});`,
     quiz: {
       question: 'Where should localStorage persistence live?',
       answers: ['In an effect', 'In every button handler', 'In route definitions'],
@@ -76,6 +87,7 @@ export const lessons = [
       'Dynamic parameters let one lesson template render many lessons.',
       'A real 404 route makes static hosting honest.',
     ],
+    code: `<Route path="/lessons/:slug" component={LessonDetail} />`,
     quiz: {
       question: 'Why route lesson details?',
       answers: ['Deep links and resume points', 'To avoid data files', 'To hide state from tests'],

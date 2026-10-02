@@ -20,6 +20,7 @@ export default function LessonDetail() {
       <p>{lesson.summary}</p>
       <div class="copy-card">
         {lesson.body.map((line) => <p>{line}</p>)}
+        {lesson.code ? <pre><code>{lesson.code}</code></pre> : null}
       </div>
       <form class="quiz-card" onSubmit={(event) => {
         event.preventDefault();
@@ -30,7 +31,7 @@ export default function LessonDetail() {
         {lesson.quiz.answers.map((answer) => (
           <label class="answer-row">
             <input name="answer" type="radio" value={answer} checked={storedAnswer === answer} onChange={() => selected(answer)} />
-            <span>{answer}</span>
+            <span class={answer.includes('(') || answer.includes('.') ? 'is-code' : ''}>{answer}</span>
           </label>
         ))}
         <button class="button small" type="submit">Check answer</button>

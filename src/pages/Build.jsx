@@ -28,10 +28,19 @@ persistProgress(window.localStorage);`}</pre>
         </article>
         <article>
           <h2>Mobile review fix</h2>
-          <p>The home route now shows a real lesson question in the first viewport and scales down the decorative sun on mobile so the demo reads as a learning app before scrolling.</p>
+          <p>The home route now shows a real lesson question in the first viewport, uses a Next lesson card instead of a duplicate giant percent, and moves framework implementation copy to this route so the product reads like a learning app before scrolling.</p>
           <pre>{`<article class="lesson-object-card">
   <h2>{firstLesson.quiz.question}</h2>
 </article>`}</pre>
+        </article>
+        <article>
+          <h2>Code and focus repair</h2>
+          <p>Review found that code-looking answers were styled like soft pills and focus relied on browser defaults. Finch now renders code examples in <code>pre code</code>, uses a mono stack for answer text such as <code>count()</code>, removes the fake-button treatment from non-interactive chips, and adds a 3px ink focus ring.</p>
+          <pre>{`a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--ink);
+}`}</pre>
         </article>
         <article>
           <h2>Vura static upload fix</h2>

@@ -2,7 +2,7 @@
 
 ## Source of truth
 - Status: Active
-- Last refreshed: 2026-10-01
+- Last refreshed: 2026-10-02
 - Primary product surfaces: home, lessons index, lesson detail quiz, flashcards, build notes, 404.
 - Evidence reviewed: sibling starter conventions, What Framework router/signals README, user request for learning/reference templates.
 
@@ -68,14 +68,14 @@
 ## Content voice
 - Tone: clear, encouraging, practical.
 - Terminology: signals, computed values, effects, routes, progress.
-- Microcopy rules: say what changed and where it is saved; avoid hype.
+- Microcopy rules: say what changed and where it is saved; avoid hype. Keep framework process copy in `/build`; the home hero should read like a learning product.
 
 ## Implementation constraints
 - Framework/styling system: What Framework JSX with router, signals, computed, effects; vanilla CSS.
 - Design-token constraints: local CSS variables only.
 - Performance constraints: no backend, no external fonts, no third-party scripts.
 - Compatibility constraints: Node 22, What 0.13.10, Vitest 4.1.11, Vura Platform CLI 0.3.0.
-- Test/screenshot expectations: Vitest state tests and Playwright desktop/mobile learning flows.
+- Test/screenshot expectations: Vitest state tests and Playwright desktop/mobile learning flows. Body gradients must not repeat, code-looking quiz text must use a mono stack, and focus rings must remain visibly ink-blue on the sky background.
 
 ## Open questions
 - [ ] Root owner / decide final hosted URL and gallery card copy after deployment.

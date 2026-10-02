@@ -22,6 +22,7 @@
 - Persistence is tested with a throwing storage object to prove restricted browser storage does not crash the app.
 - Browser smoke found that a debounced persistence effect alone could lose a quiz answer if the user navigated immediately after submit. `answerQuiz` now persists synchronously after the source signal updates; the effect remains as a backup for other progress changes.
 - Mobile visual review found the first screen looked too much like a generic hero/progress card and the yellow sun crowded the nav. The home route now shows a real lesson quiz question above the fold and reduces the mobile sun so the artifact reads as a learning app immediately.
+- Claude design review found the hero still described the framework more than the course, non-interactive answer chips looked like buttons, and code was not visually unmistakable. The repair moved implementation copy to `/build`, changed the hero to course language, replaced the duplicate giant progress card with a Next lesson card, rendered lesson snippets as `pre code`, applied a mono stack to code-looking answer labels, added an explicit 3px focus ring, and made the sky/sun background `min-height:100vh` with `no-repeat`.
 
 Before:
 
