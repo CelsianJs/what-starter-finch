@@ -54,7 +54,7 @@ After: the home route shows the first lesson quiz question directly below the he
 
 ```jsx
 <article class="lesson-object-card">
-  <p class="eyebrow">first lesson object</p>
+  <p class="eyebrow">First signal lesson</p>
   <h2>{firstLesson.quiz.question}</h2>
   <div class="answer-chips">...</div>
 </article>

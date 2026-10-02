@@ -4,7 +4,7 @@ import { mkdirSync } from 'node:fs';
 test('lesson quiz persists progress and can reset', async ({ page }, testInfo) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: /small lessons/i })).toBeVisible();
-  await expect(page.getByText('FIRST LESSON OBJECT')).toBeVisible();
+  await expect(page.getByText('FIRST SIGNAL LESSON')).toBeVisible();
   await expect(page.getByRole('heading', { name: /what does a signal read look like/i })).toBeVisible();
   await expect(page.getByRole('heading', { name: /signals hold tiny truths/i })).toBeVisible();
   await expect(page.getByText(/standalone What Framework starter/i)).toHaveCount(0);

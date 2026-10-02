@@ -15,7 +15,7 @@ export default function Home() {
           and resuming exactly where the last browser session stopped.
         </p>
         <article class="lesson-object-card">
-          <p class="eyebrow">first lesson object</p>
+          <p class="eyebrow">First signal lesson</p>
           <h2>{firstLesson.quiz.question}</h2>
           <div class="answer-chips" aria-label="Sample quiz answers">
             {firstLesson.quiz.answers.map((answer) => <span class={answer.includes('(') || answer.includes('.') ? 'is-code' : ''}>{answer}</span>)}
