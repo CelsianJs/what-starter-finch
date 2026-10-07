@@ -96,3 +96,5 @@ pre code { background: transparent; border-radius: 0; padding: 0; }
   .lesson-object-card .eyebrow { margin-bottom: 8px; }
   .lesson-object-card h2 { font-size: 1.35rem; }
 }
+:where(.quiz-card) .button { min-height: 44px; }
+.card-position { color: var(--green); font-weight: 700; }

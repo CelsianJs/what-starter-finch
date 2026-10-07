@@ -4,7 +4,7 @@ import { completedCount, completionPercent, progress, resetProgress } from '../s
 
 export default function Home() {
   const firstLesson = lessons[0];
-  const nextLesson = lessons.find((lesson) => !progress().completed.includes(lesson.slug)) || firstLesson;
+  const nextLesson = () => lessons.find((lesson) => !progress().completed.includes(lesson.slug));
   return (
     <section class="hero page-enter">
       <div>
@@ -28,11 +28,13 @@ export default function Home() {
         </div>
       </div>
       <aside class="hero-card">
-        <p class="eyebrow">Next lesson</p>
-        <h2>{nextLesson.title}</h2>
-        <p>{nextLesson.summary}</p>
+        <p class="eyebrow">{() => nextLesson() ? 'Next lesson' : 'Course complete'}</p>
+        <h2>{() => nextLesson()?.title || 'A full shelf of small wins.'}</h2>
+        <p>{() => nextLesson()?.summary || 'All four lessons are complete. Keep the ideas fresh with a round of practice cards.'}</p>
         <p class="progress-note">{completedCount()} of {lessons.length} complete · {completionPercent()}% progress</p>
-        <Link class="button small" href={`/lessons/${nextLesson.slug}`}>Continue lesson</Link>
+        {() => nextLesson()
+          ? <Link class="button small" href={`/lessons/${nextLesson().slug}`}>Continue lesson</Link>
+          : <Link class="button small" href="/practice">Practice cards</Link>}
         <button class="link-button" onClick={resetProgress}>Reset progress</button>
       </aside>
     </section>
