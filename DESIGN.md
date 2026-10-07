@@ -2,7 +2,7 @@
 
 ## Source of truth
 - Status: Active
-- Last refreshed: 2026-10-02
+- Last refreshed: 2026-10-07
 - Primary product surfaces: home, lessons index, lesson detail quiz, flashcards, build notes, 404.
 - Evidence reviewed: sibling starter conventions, What Framework router/signals README, user request for learning/reference templates.
 
@@ -76,6 +76,11 @@
 - Performance constraints: no backend, no external fonts, no third-party scripts.
 - Compatibility constraints: Node 22, What 0.13.10, Vitest 4.1.11, Vura Platform CLI 0.3.0.
 - Test/screenshot expectations: Vitest state tests and Playwright desktop/mobile learning flows. Body gradients must not repeat, code-looking quiz text must use a mono stack, and focus rings must remain visibly ink-blue on the sky background.
+
+## Complete learning flow
+- Current card/index and home continuation are accessors, not run-once snapshots; card position is visible and reveal resets on advance.
+- Quiz selection/feedback belong to the mounted lesson. Success offers the next catalog lesson or final practice action; quiz buttons are at least 44px tall.
+- Completing the catalog yields an explicit course-complete home state. Reset immediately restores the first lesson continuation.
 
 ## Open questions
 - [ ] Root owner / decide final hosted URL and gallery card copy after deployment.

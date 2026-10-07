@@ -89,6 +89,7 @@ effect(() => {
   if (typeof window === 'undefined') return;
   clearTimeout(saveTimer);
   saveTimer = window.setTimeout(() => persistProgress(window.localStorage), 60);
+  return () => clearTimeout(saveTimer);
 });
 
 effect(() => {

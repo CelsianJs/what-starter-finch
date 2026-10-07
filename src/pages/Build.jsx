@@ -5,6 +5,15 @@ export default function Build() {
       <h1>How Finch is built.</h1>
       <div class="build-notes">
         <article>
+          <h2>Run once, read reactively</h2>
+          <p>The practice component originally captured card index and lesson once, so Next card saved a new position without changing the visible card. Accessors now read current state; quiz selection and reveal state belong to each mounted page. The home continuation and post-quiz next-lesson action use the same lesson catalog.</p>
+          <pre>{`const index = () => progress().cardIndex % dueCards().length;
+const lesson = () => dueCards()[index()];
+
+<h2>{() => revealed() ? lesson().card.back : lesson().card.front}</h2>`}</pre>
+          <p>Keep component setup stable, put changing reads inside accessors, and test the second card as well as the initial reveal. Link requires a concrete safe href; create a changing continuation Link inside a reactive function child instead of passing a function to its href. Persistence timers return cleanup; the deck remains a simple local review order.</p>
+        </article>
+        <article>
           <h2>Signals</h2>
           <p><code>src/state/progress.js</code> keeps source state in one <code>progress</code> signal, plus an active lesson signal.</p>
           <pre>{`export const progress = signal({

@@ -100,6 +100,15 @@ The check also deliberately proves the former partial shape fails for the expect
 - Real flow: answer the Signals quiz, reload, observe `25% complete`, reset to `0%`, reveal a flashcard, hit a missing route.
 - Visual proof: desktop and mobile screenshots are written to `test-results/screenshots`.
 
+## Reactive learning flow repair
+
+`Practice` previously captured `cards`, `index`, and `lesson` in a run-once component body. Next card updated storage while the displayed card stayed put. It now reads current card/index through accessors and owns reveal state per mount, exposes `Card N of 4`, and resets reveal on advance. Quiz selected/feedback state is also per mount. A successful answer provides the next catalog lesson; home continuation recalculates after reset and shows the course-complete state. Quiz actions have a 44px minimum height.
+
+Smooth path: keep setup stable, use accessors for changing reads, return cleanup from the persistence timer effect, and test advance/reveal/wrap plus quiz continuation, not just the first reveal. This remains local browser learning state and a simple review order, not account sync or a spaced-repetition algorithm.
+
+Router contract: What `Link` validates `href` as a concrete safe string. Do not pass an accessor function to its `href`; create the Link inside a reactive function child so the current path is resolved before Link setup. The browser regression checks the actual continuation href before and after reset.
+
+
 ## Known limitations
 
 - Progress is local-only by design; there is no account sync.
