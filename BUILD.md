@@ -115,3 +115,9 @@ Router contract: What `Link` validates `href` as a concrete safe string. Do not 
 - Flashcard repetition is a simple due-card ordering, not a full spaced-repetition algorithm.
 - The app is static and does not use Vura server APIs; Signal covers the server-rendered/runtime route features in this starter batch.
 - Finch relies on Vura's static manifest synthesis during deployment rather than shipping a handwritten `dist/manifest.json`.
+
+## Compact application styling
+
+Keep typography and control geometry consistent across home, detail, forms, and build routes. The local sans-serif stack uses 16px body copy, 14px labels and controls, bounded 28–36px primary headings, 24px section headings, and 44px interactive targets. The same subtle borders, 8px corners, and focus treatment apply to selected, revealed, and disabled states.
+
+Flatten decorative backgrounds before adding another override. Consolidate the existing selectors so desktop and mobile share one component system; preserve domain state, route IDs, native controls, and code examples. On small screens, put the next useful task before secondary previews. Test the real workflow after a style change, including persisted/denied-storage state and narrow code blocks.

@@ -2,7 +2,7 @@
 
 ## Source of truth
 - Status: Active
-- Last refreshed: 2026-10-07
+- Last refreshed: 2026-10-08
 - Primary product surfaces: home, lessons index, lesson detail quiz, flashcards, build notes, 404.
 - Evidence reviewed: sibling starter conventions, What Framework router/signals README, user request for learning/reference templates.
 
@@ -32,12 +32,12 @@
 - Tradeoffs: compact original lesson copy beats broad curriculum coverage.
 
 ## Visual language
-- Color: sky blue, warm yellow, ink blue, green progress.
-- Typography: rounded system typography for legibility and warmth.
-- Spacing/layout rhythm: airy cards, large headline, compact progress ribbon.
-- Shape/radius/elevation: rounded glassy cards and pill controls.
-- Motion: small page entrance and card reveal; reduced-motion disables them.
-- Imagery/iconography: simple geometric bird mark.
+- Color: quiet blue-neutral page (`#f6f8fb`), white surfaces, ink-blue navigation/actions, green progress and the existing small yellow bird mark.
+- Typography: shared local Avenir Next / Segoe UI Variable / Segoe UI sans-serif stack; body 16px/1.6, labels and controls 14px, headings 28–36px/1.2, section headings 24px/1.3, brand 24px. Code remains monospace.
+- Spacing/layout rhythm: 8px rhythm, compact continuation and quiz panels, bounded 180px practice card; native controls have at least 44px targets.
+- Shape/radius/elevation: 8px corners, subtle borders and flat white surfaces; no glass blur, sun backdrop, shadows, rotations, or pill chrome.
+- Motion: short route entrance and reveal color change; reduced-motion disables transitions.
+- Imagery/iconography: preserve the existing local bird mark.
 
 ## Components
 - Existing components to reuse: none; standalone starter.
@@ -75,7 +75,7 @@
 - Design-token constraints: local CSS variables only.
 - Performance constraints: no backend, no external fonts, no third-party scripts.
 - Compatibility constraints: Node 22, What 0.13.10, Vitest 4.1.11, Vura Platform CLI 0.3.0.
-- Test/screenshot expectations: Vitest state tests and Playwright desktop/mobile learning flows. Body gradients must not repeat, code-looking quiz text must use a mono stack, and focus rings must remain visibly ink-blue on the sky background.
+- Test/screenshot expectations: Vitest state tests and Playwright desktop/mobile learning flows. Flat mobile/desktop surfaces must stay consistent, code-looking quiz text must use a mono stack, and focus rings remain visibly ink-blue.
 
 ## Complete learning flow
 - Current card/index and home continuation are accessors, not run-once snapshots; card position is visible and reveal resets on advance.
