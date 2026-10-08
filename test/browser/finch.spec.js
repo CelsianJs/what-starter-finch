@@ -55,3 +55,29 @@ test('build guide preserves accessor source as text', async ({ page }) => {
   await page.goto('/build');
   await expect(page.locator('pre').first()).toContainText('const lesson = () => dueCards()[index()]');
 });
+
+
+test('modern typography and touch geometry remain consistent across routes', async ({ page }) => {
+  for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
+    await page.setViewportSize(viewport);
+    for (const route of ["/","/lessons/signals","/practice","/build"]) {
+      await page.goto(route);
+      await expect(page.locator('h1')).toBeVisible();
+      const metrics = await page.evaluate(() => {
+        const heading = getComputedStyle(document.querySelector('h1'));
+        const body = getComputedStyle(document.body);
+        const targets = [...document.querySelectorAll('nav a, button, .button, a.brand')].filter(node => node.getClientRects().length);
+        return { heading: parseFloat(heading.fontSize), family: body.fontFamily, body: body.fontSize, overflow: document.documentElement.scrollWidth > innerWidth, smallTargets: targets.filter(node => node.getBoundingClientRect().height < 43.9).map(node => node.textContent) };
+      });
+      expect(metrics.family).toContain('Avenir Next');
+      expect(metrics.body).toBe('16px');
+      expect(metrics.heading).toBeGreaterThanOrEqual(28);
+      expect(metrics.heading).toBeLessThanOrEqual(36);
+      expect(metrics.overflow).toBe(false);
+      expect(metrics.smallTargets).toEqual([]);
+      const firstNav = page.locator('nav a').first();
+      await firstNav.focus();
+      await expect(firstNav).toHaveCSS('outline-style', 'solid');
+    }
+  }
+});
